@@ -1,0 +1,25 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Pibuka personal blog server",
+  "main": "app.js",
+  "scripts": {
+    "serve": "nodemon app.js"
+  },
+  "author": "谢浩沛",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^7.5.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "nodemon": "^2.0.4"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
+    "mysql2": "^2.1.0",
+    "sequelize": "^6.3.3"
+  }
+}
