@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const { sequelize } = require('./models');
 
 const app = new express();
 app.use(bodyParser.json());
@@ -20,6 +21,14 @@ app.post('/user', (req, res) => {
   });
 });
 
-app.listen('3000', () => {
-  console.log('server running at port localhost:3000');
-});
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+    app.listen(3000, () => {
+      console.log('server running at port 3000');
+    });
+  })
+  .catch(error => {
+    console.error('Unable to connect to the database:', error);
+  });
