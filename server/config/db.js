@@ -1,10 +1,12 @@
-let mysql = require('mysql');
+const mysql = require('mysql2');
 // 配置数据库线程池连接
-let pool = mysql.createPool({
+const pool = mysql.createPool({
   host: 'localhost',
   user: 'root',
   password: 'admin',
   database: 'blog',
+  connectionLimit: 10,
+  supportBigNumbers: true,
 });
 
 function query(sql, callback) {
