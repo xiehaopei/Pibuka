@@ -9,9 +9,10 @@ const pool = mysql.createPool({
   supportBigNumbers: true,
 });
 
-function query(sql, callback) {
-  pool.getConnection(function (err, connection) {
-    connection.query(sql, function (err, rows) {
+function query(sql, sqlArr, callback) {
+  pool.getConnection((err, connection) => {
+    if (err) throw err;
+    connection.query(sql, sqlArr, (err, rows) => {
       callback(err, rows);
       connection.release();
     });
