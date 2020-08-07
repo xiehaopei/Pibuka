@@ -12,8 +12,8 @@ const pool = mysql.createPool({
 function query(sql, sqlArr, callback) {
   pool.getConnection((err, connection) => {
     if (err) throw err;
-    connection.query(sql, sqlArr, (err, rows) => {
-      callback(err, rows);
+    connection.query(sql, sqlArr, (err, result) => {
+      callback(err, result);
       connection.release();
     });
   });
