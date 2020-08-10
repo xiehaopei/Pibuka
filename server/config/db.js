@@ -1,5 +1,5 @@
 const mysql = require('mysql2');
-// 配置数据库线程池连接
+
 const pool = mysql.createPool({
   host: 'localhost',
   user: 'root',
