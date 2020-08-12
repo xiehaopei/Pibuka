@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/adminController');
+const jwtAuth = require('../token/index');
+
+router.use(jwtAuth);
 
 router.get('/query', controller.queryAll);
 

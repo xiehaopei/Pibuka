@@ -1,5 +1,7 @@
 const db = require('../config/db');
 const sql = require('../sql/admin');
+const jwt = require('jsonwebtoken');
+const { secretKey } = require('../token/constant');
 
 const queryAll = (req, res) => {
   db.query(sql.queryAll, (err, result) => {
@@ -16,7 +18,13 @@ const login = (req, res) => {
   db.query(sql.query, [params.username, params.password], (err, result) => {
     if (err) throw err;
     if (result.length) {
-      res.status(200).send({
+      const token = jwt.sign(params, secretKey, {
+        expiresIn: 60 * 60 * 24 * 7,
+      });
+      res.json({
+        status: 200,
+        msg: '登录成功！',
+        token: token,
         data: result,
       });
     } else {
