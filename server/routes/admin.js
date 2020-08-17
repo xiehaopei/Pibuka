@@ -1,9 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/adminController');
-const jwtAuth = require('../token/index');
+const token = require('../token/index');
 
-router.use(jwtAuth);
+router.use(token);
+router.use((req, res, next) => {
+  console.log('this is a api request!');
+  next();
+});
 
 router.get('/query', controller.queryAll);
 

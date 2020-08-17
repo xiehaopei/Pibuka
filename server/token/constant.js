@@ -6,5 +6,5 @@ module.exports = {
     let md5 = crypto.createHash('md5');
     return md5.update(pwd).digest('hex');
   },
-  secretKey: 'nodebook_index', //Token加密公共部分
+  secretKey: 'xiehaopei', //Token加密公共部分
 };

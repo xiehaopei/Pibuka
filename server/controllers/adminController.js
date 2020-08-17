@@ -22,10 +22,8 @@ const login = (req, res) => {
         expiresIn: 60 * 60 * 24 * 7,
       });
       res.json({
-        status: 200,
-        msg: '登录成功！',
-        token: token,
-        data: result,
+        data: { id: result[0].id, username: result[0].username, password: result[0].password, token: token },
+        meta: { msg: '登录成功！', status: 200 },
       });
     } else {
       res.status(400).send({
