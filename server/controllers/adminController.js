@@ -12,17 +12,27 @@ const queryAll = (req, res) => {
 
 const login = (req, res) => {
   const params = {
-    username: req.query.username,
-    password: req.query.password,
+    username: req.body.username,
+    password: req.body.password,
   };
   db.query(sql.query, [params.username, params.password], (err, result) => {
-    if (err) throw err;
+    if (err) {
+      res.status(400).send({
+        msg: '服务器请求失败！',
+      });
+    }
     if (result.length) {
       const token = jwt.sign(params, secretKey, {
         expiresIn: 60 * 60 * 24 * 7,
       });
       res.json({
-        data: { id: result[0].id, username: result[0].username, password: result[0].password, token: token },
+        data: {
+          id: result[0].id,
+          username: result[0].username,
+          password: result[0].password,
+          email: result[0].email,
+          token: token,
+        },
         meta: { msg: '登录成功！', status: 200 },
       });
     } else {
@@ -30,6 +40,22 @@ const login = (req, res) => {
         msg: '用户名或密码错误!',
       });
     }
+  });
+};
+
+const queryById = (req, res) => {
+  db.query(sql.queryById, [req.query.id], (err, result) => {
+    if (err) throw err;
+    res.status(200).json({
+      data: {
+        id: result[0].id,
+        username: result[0].username,
+        password: result[0].password,
+        email: result[0].email,
+        img: result[0].img,
+      },
+      meta: { msg: '查询成功！', status: 200 },
+    });
   });
 };
 
@@ -69,4 +95,4 @@ const update = (req, res) => {
   });
 };
 
-module.exports = { queryAll, login, append, remote, update };
+module.exports = { queryAll, queryById, login, append, remote, update };

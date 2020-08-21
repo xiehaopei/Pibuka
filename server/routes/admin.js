@@ -10,13 +10,10 @@ router.use((req, res, next) => {
 });
 
 router.get('/query', controller.queryAll);
-
-router.get('/login', controller.login);
-
+router.post('/login', controller.login);
+router.get('/query/:id', controller.queryById);
 router.post('/add', controller.append);
-
 router.delete('/remote/:id', controller.remote);
-
 router.put('/update', controller.update);
 
 module.exports = router;
