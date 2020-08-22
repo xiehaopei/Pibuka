@@ -29,10 +29,10 @@ export default {
     async login() {
       const { data: res } = await this.$http.post(this.url, this.formData);
       console.log('res', res);
-      if (res.meta.status !== 200) alert('用户名或密码错误！');
-      else {
+      // console.log('用户名或密码错误！');
+      if (res.meta.status === 200) {
         alert('登录成功！');
-        window.sessionStorage.setItem('token', res.data.token);
+        window.localStorage.setItem('token', res.data.token);
         this.$router.push('/home');
       }
     }
