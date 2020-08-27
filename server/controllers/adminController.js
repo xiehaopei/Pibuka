@@ -17,8 +17,8 @@ const login = (req, res) => {
   };
   db.query(sql.query, [params.username, params.password], (err, result) => {
     if (err) {
-      res.status(400).send({
-        msg: '服务器请求失败！',
+      res.send({
+        meta: { msg: '服务器请求失败！', status: 404 },
       });
     }
     if (result.length) {
@@ -31,13 +31,14 @@ const login = (req, res) => {
           username: result[0].username,
           password: result[0].password,
           email: result[0].email,
+          avatar: result[0].avatar,
           token: token,
         },
         meta: { msg: '登录成功！', status: 200 },
       });
     } else {
-      res.status(400).send({
-        msg: '用户名或密码错误!',
+      res.send({
+        meta: { msg: '用户名或密码错误！', status: 400 },
       });
     }
   });
@@ -94,5 +95,7 @@ const update = (req, res) => {
     });
   });
 };
+
+
 
 module.exports = { queryAll, queryById, login, append, remote, update };

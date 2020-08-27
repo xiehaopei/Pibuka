@@ -10,6 +10,7 @@ app.use(cors());
 
 app.use('/', require('./routes'));
 app.use('/admin', require('./routes/admin'));
+app.use('/menu', require('./routes/menu'));
 
 app.use(express.static('public'));
 

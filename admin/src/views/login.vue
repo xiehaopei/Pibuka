@@ -1,3 +1,45 @@
+<template>
+  <div class="login">
+    <img src="@/assets/img/forest.jpg" class="image" />
+    <form class="box">
+      <h1>login</h1>
+      <input type="text" placeholder="username" v-model="formData.username" />
+      <input type="password" placeholder="password" v-model="formData.password" />
+      <button @click.prevent="login">Login</button>
+    </form>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      formData: {
+        username: 'xiehaopei',
+        password: '15907678645'
+      }
+    };
+  },
+  methods: {
+    async login() {
+      try {
+        const { data: res } = await this.$http.post('admin/login', this.formData);
+        console.log('res', res);
+        if (res.meta.status === 200) {
+          this.$Message.success('登录成功！');
+          window.localStorage.setItem('token', res.data.token);
+          this.$store.state.userData = res.data;
+          this.$router.push('/home');
+        } else return this.$Message.error('用户名或密码错误！');
+      } catch (error) {
+        this.$Message.error('服务器出现错误！');
+      }
+    }
+  }
+};
+</script>
+
+<style>
 .image {
   position: absolute;
   width: 100%;
@@ -73,3 +115,4 @@ input::placeholder {
   outline: none;
   cursor: pointer;
 }
+</style>

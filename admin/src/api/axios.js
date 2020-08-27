@@ -22,9 +22,8 @@ axios.interceptors.response.use(
   },
   err => {
     if (err.response.status === 401) {
-      alert('token失效！');
+      this.$Message.error('token失效，请重新登录!');
       window.localStorage.removeItem('token');
-      history.push('/login');
     } else {
       console.log('Error', err.message);
     }

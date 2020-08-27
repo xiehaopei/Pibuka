@@ -1,8 +1,10 @@
+<!-- 组件说明 -->
 <template>
-  <div class>Home Page</div>
+  <div class>标签管理</div>
 </template>
 
 <script>
+//import x from ''
 export default {
   components: {},
   data() {

@@ -10,13 +10,38 @@ const routes = [
   },
   {
     path: '/login',
-    name: 'login',
-    component: () => import('../views/login/login.vue'),
+    component: () => import('../views/login.vue'),
   },
   {
     path: '/home',
-    name: 'home',
-    component: () => import('../views/home/home.vue'),
+    component: () => import('../views/home.vue'),
+    redirect: '/welcome',
+    children: [
+      {
+        path: '/welcome',
+        component: () => import('../views/home/welcome.vue'),
+      },
+      {
+        path: '/data-analyze',
+        component: () => import('../views/home/data-analyze.vue'),
+      },
+      {
+        path: '/article-management',
+        component: () => import('../views/home/article-management.vue'),
+      },
+      {
+        path: '/tag-management',
+        component: () => import('../views/home/tag-management.vue'),
+      },
+      {
+        path: '/article-publish',
+        component: () => import('../views/home/article-publish.vue'),
+      },
+      {
+        path: '/personal',
+        component: () => import('../views/home/personal.vue'),
+      },
+    ],
   },
 ];
 
