@@ -1,6 +1,8 @@
 <!-- 组件说明 -->
 <template>
-  <div class>标签管理</div>
+  <div>
+    <el-card shadow>文章发布</el-card>
+  </div>
 </template>
 
 <script>

@@ -32,6 +32,7 @@ const login = (req, res) => {
           password: result[0].password,
           email: result[0].email,
           avatar: result[0].avatar,
+          description: result[0].description,
           token: token,
         },
         meta: { msg: '登录成功！', status: 200 },
@@ -53,7 +54,8 @@ const queryById = (req, res) => {
         username: result[0].username,
         password: result[0].password,
         email: result[0].email,
-        img: result[0].img,
+        avatar: result[0].avatar,
+        description: result[0].description,
       },
       meta: { msg: '查询成功！', status: 200 },
     });
@@ -83,19 +85,31 @@ const remote = (req, res) => {
 const update = (req, res) => {
   const param = {
     username: req.body.username,
-    password: req.body.password,
+    email: req.body.email,
+    description: req.body.description,
     id: req.body.id,
   };
-  db.query(sql.update, [param.username, param.password, param.id], (err, result) => {
+  db.query(sql.update, [param.username, param.email, param.description, param.id], err => {
     if (err) throw err;
-    res.status(201).send({
-      msg: '数据修改成功！',
+    res.json({
+      meta: { msg: '数据修改成功！', status: 200 },
       data: req.body,
-      result: result,
     });
   });
 };
 
+const updatePassword = (req, res) => {
+  const param = {
+    password: req.body.password,
+    id: req.body.id,
+  };
+  db.query(sql.updatePassword, [param.password, param.id], err => {
+    if (err) throw err;
+    res.json({
+      meta: { msg: '数据修改成功！', status: 200 },
+      data: req.body,
+    });
+  });
+};
 
-
-module.exports = { queryAll, queryById, login, append, remote, update };
+module.exports = { queryAll, queryById, login, append, remote, update, updatePassword };

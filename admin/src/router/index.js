@@ -15,27 +15,27 @@ const routes = [
   {
     path: '/home',
     component: () => import('../views/home.vue'),
-    redirect: '/welcome',
+    redirect: '/monitor',
     children: [
       {
-        path: '/welcome',
-        component: () => import('../views/home/welcome.vue'),
+        path: '/monitor',
+        component: () => import('../views/home/monitor.vue'),
       },
       {
-        path: '/data-analyze',
-        component: () => import('../views/home/data-analyze.vue'),
+        path: '/articles',
+        component: () => import('../views/home/articles.vue'),
       },
       {
-        path: '/article-management',
-        component: () => import('../views/home/article-management.vue'),
+        path: '/publish',
+        component: () => import('../views/home/publish.vue'),
       },
       {
-        path: '/tag-management',
-        component: () => import('../views/home/tag-management.vue'),
+        path: '/tags',
+        component: () => import('../views/home/tags.vue'),
       },
       {
-        path: '/article-publish',
-        component: () => import('../views/home/article-publish.vue'),
+        path: '/comments',
+        component: () => import('../views/home/comments'),
       },
       {
         path: '/personal',

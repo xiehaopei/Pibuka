@@ -1,6 +1,7 @@
-<!-- 组件说明 -->
 <template>
-  <div class>文章发布</div>
+  <div class>
+    <el-card shadow>评论管理</el-card>
+  </div>
 </template>
 
 <script>

@@ -1,14 +1,19 @@
 <template>
   <el-container>
     <el-aside>
-      <el-avatar :src="userData.avatar" fit="cover"></el-avatar>
+      <el-avatar :src="userData.avatar" fit="cover" shape="square"></el-avatar>
       <font>Pibuka</font>
       <div class="setting">
         <el-button type="success" icon="el-icon-setting" size="mini" @click="setting">设置</el-button>
         <el-button type="danger" icon="el-icon-switch-button" size="mini" @click="out">退出</el-button>
       </div>
-      <el-menu :router="true">
-        <el-menu-item v-for="item in menu" :key="item.id" :index="item.path">
+      <el-menu :router="true" :default-active="activePath">
+        <el-menu-item
+          v-for="item in menu"
+          :key="item.id"
+          :index="item.path"
+          @click="savePath(item.path)"
+        >
           <i :class="iconObj[item.id]"></i>
           <span slot="title">{{item.authName}}</span>
         </el-menu-item>
@@ -26,13 +31,15 @@ export default {
   data() {
     return {
       userData: this.$store.state.userData,
+      activePath: 'monitor',
       menu: '',
       iconObj: {
         '1': 'el-icon-monitor',
         '2': 'el-icon-document',
-        '3': 'el-icon-folder',
-        '4': 'el-icon-edit',
-        '5': 'el-icon-user'
+        '3': 'el-icon-edit-outline',
+        '4': 'el-icon-paperclip',
+        '5': 'el-icon-chat-dot-round',
+        '6': 'el-icon-user'
       }
     };
   },
@@ -53,7 +60,12 @@ export default {
       this.$router.push('/login');
     },
     setting() {
-      this.$router.push('/home/personal');
+      this.$router.push('/personal');
+      this.activePath = 'personal';
+    },
+    savePath(path) {
+      this.activePath = path;
+      console.log(this.activePath);
     }
   },
   created() {
@@ -91,12 +103,12 @@ export default {
       color: #fff;
     }
     .el-menu-item.is-active {
-      background-color: #d4d4d4;
+      background-color: #fff;
       color: #806d9e;
     }
   }
 }
 .el-main {
-  background-color: #d4d4d4;
+  background-color: #fff;
 }
 </style>

@@ -1,5 +1,8 @@
+<!-- 组件说明 -->
 <template>
-  <div class>数据分析</div>
+  <div>
+    <el-card shadow>文章管理</el-card>
+  </div>
 </template>
 
 <script>

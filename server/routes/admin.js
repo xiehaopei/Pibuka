@@ -11,5 +11,6 @@ router.get('/query/:id', controller.queryById);
 router.post('/add', controller.append);
 router.delete('/remote/:id', controller.remote);
 router.put('/update', controller.update);
+router.put('/updatePassword', controller.updatePassword);
 
 module.exports = router;
