@@ -19,6 +19,9 @@ import {
   Dialog,
   Upload,
   Tag,
+  DatePicker,
+  Checkbox,
+  CheckboxGroup,
 } from 'element-ui';
 
 Vue.use(Button);
@@ -37,6 +40,9 @@ Vue.use(Input);
 Vue.use(Dialog);
 Vue.use(Upload);
 Vue.use(Tag);
+Vue.use(DatePicker);
+Vue.use(Checkbox);
+Vue.use(CheckboxGroup);
 
 Vue.prototype.$Message = Message;
 Vue.prototype.$comfirm = MessageBox.comfirm;
