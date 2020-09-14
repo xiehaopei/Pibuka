@@ -75,40 +75,43 @@ export default {
 </script>
 
 <style scoped lang="less">
-.el-aside {
-  background-color: #806d9e;
+.el-container {
   height: 100vh;
-  .el-avatar {
-    display: block;
-    width: 1rem;
-    height: 1rem;
-    margin: 0.15rem auto 0.05rem;
-  }
-  font {
-    font-size: 0.12rem;
-    color: aquamarine;
-    display: flex;
-    justify-content: center;
-  }
-  .setting {
-    font-size: 0.1rem;
-    display: flex;
-    justify-content: center;
-    margin: 0.05rem auto 0.2rem;
-  }
-  .el-menu {
-    border-right: none;
-    .el-menu-item {
-      background-color: #806d9e;
-      color: #fff;
+  .el-aside {
+    background-color: #806d9e;
+    height: 100vh;
+    .el-avatar {
+      display: block;
+      width: 1rem;
+      height: 1rem;
+      margin: 0.15rem auto 0.05rem;
     }
-    .el-menu-item.is-active {
-      background-color: #fff;
-      color: #806d9e;
+    font {
+      font-size: 0.12rem;
+      color: aquamarine;
+      display: flex;
+      justify-content: center;
+    }
+    .setting {
+      font-size: 0.1rem;
+      display: flex;
+      justify-content: center;
+      margin: 0.05rem auto 0.2rem;
+    }
+    .el-menu {
+      border-right: none;
+      .el-menu-item {
+        background-color: #806d9e;
+        color: #fff;
+      }
+      .el-menu-item.is-active {
+        background-color: #fff;
+        color: #806d9e;
+      }
     }
   }
-}
-.el-main {
-  background-color: #fff;
+  .el-main {
+    background-color: #fff;
+  }
 }
 </style>

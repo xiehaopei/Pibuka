@@ -22,6 +22,11 @@ import {
   DatePicker,
   Checkbox,
   CheckboxGroup,
+  Pagination,
+  Table,
+  TableColumn,
+  Tooltip,
+  Loading
 } from 'element-ui';
 
 Vue.use(Button);
@@ -43,6 +48,12 @@ Vue.use(Tag);
 Vue.use(DatePicker);
 Vue.use(Checkbox);
 Vue.use(CheckboxGroup);
+Vue.use(Pagination);
+Vue.use(Table);
+Vue.use(TableColumn);
+Vue.use(Tooltip);
+Vue.use(Loading.directive);
 
+Vue.prototype.$loading = Loading.service;
 Vue.prototype.$Message = Message;
 Vue.prototype.$comfirm = MessageBox.comfirm;

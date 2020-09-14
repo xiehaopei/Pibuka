@@ -22,7 +22,7 @@ const addTag = (req, res) => {
 };
 
 const delTag = (req, res) => {
-  db.query(sql.delTag, [req.body.tag], (err, result) => {
+  db.query(sql.delTag, [req.body.tagId], (err, result) => {
     if (err) throw err;
     res.json({
       meta: { status: 200, msg: '删除成功！' },
@@ -31,4 +31,24 @@ const delTag = (req, res) => {
   });
 };
 
-module.exports = { getTags, addTag, delTag };
+const linkArticles = (req, res) => {
+  db.query(sql.linkArticles, [req.query.tagId], (err, result) => {
+    if (err) throw err;
+    res.json({
+      meta: { status: 200, msg: '查询成功！' },
+      data: result,
+    });
+  });
+};
+
+const delTagLink = (req, res) => {
+  db.query(sql.delTagLink, [req.body.tagId], (err, result) => {
+    if (err) throw err;
+    res.json({
+      meta: { status: 200, msg: '删除成功！' },
+      data: result,
+    });
+  });
+};
+
+module.exports = { getTags, addTag, delTag, linkArticles, delTagLink };

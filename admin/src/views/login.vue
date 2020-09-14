@@ -5,7 +5,7 @@
       <h1>login</h1>
       <input type="text" placeholder="username" v-model="formData.username" />
       <input type="password" placeholder="password" v-model="formData.password" />
-      <button @click.prevent="login">Login</button>
+      <button @click.prevent="login" @keydown.enter="login">Login</button>
     </form>
   </div>
 </template>
