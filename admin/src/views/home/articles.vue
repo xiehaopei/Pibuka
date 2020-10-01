@@ -41,7 +41,7 @@
               icon="el-icon-delete"
               size="mini"
               type="danger"
-              @click="delArticle(options.row.articleId)"
+              @click="delAricleBox(options.row.articleId)"
             >删除</el-button>
           </template>
         </el-table-column>
@@ -65,8 +65,12 @@
         <el-form-item label="标题">
           <el-input v-model="article.title"></el-input>
         </el-form-item>
-        <el-form-item label="摘要"></el-form-item>
-        <el-form-item label="标签"></el-form-item>
+        <el-form-item label="摘要">
+          <el-input type="textarea" v-model="article.digest"></el-input>
+        </el-form-item>
+        <el-form-item label="标签">
+          <!-- <el-tag v-for="tag in article.tags" :key="tag">{{tag}}</el-tag> -->
+        </el-form-item>
         <el-form-item label="内容"></el-form-item>
         <el-form-item label="时间"></el-form-item>
         <el-form-item label="封面图"></el-form-item>
@@ -157,6 +161,22 @@ export default {
         this.tags[item.articleId] = temp;
       }
     },
+    delAricleBox(articleId) {
+      this.$confirm('确认删除该篇文章吗？', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+        .then(() => {
+          this.delArticle(articleId);
+        })
+        .catch(() => {
+          this.$Message({
+            type: 'info',
+            message: '已取消删除'
+          });
+        });
+    },
     async delArticle(articleId) {
       try {
         await this.$http.all([
@@ -171,6 +191,7 @@ export default {
     },
     editArticle(row) {
       this.article = deepCopy(row);
+      console.log(this.article);
       this.editDialogVisible = true;
     },
     handleSizeChange(size) {

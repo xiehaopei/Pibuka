@@ -5,6 +5,7 @@ import {
   MessageBox,
   Button,
   Menu,
+  Submenu,
   MenuItem,
   Avatar,
   Container,
@@ -26,11 +27,13 @@ import {
   Table,
   TableColumn,
   Tooltip,
-  Loading
+  Loading,
+  Drawer,
 } from 'element-ui';
 
 Vue.use(Button);
 Vue.use(Menu);
+Vue.use(Submenu);
 Vue.use(MenuItem);
 Vue.use(Avatar);
 Vue.use(Container);
@@ -52,8 +55,9 @@ Vue.use(Pagination);
 Vue.use(Table);
 Vue.use(TableColumn);
 Vue.use(Tooltip);
+Vue.use(Drawer);
 Vue.use(Loading.directive);
 
 Vue.prototype.$loading = Loading.service;
 Vue.prototype.$Message = Message;
-Vue.prototype.$comfirm = MessageBox.comfirm;
+Vue.prototype.$confirm = MessageBox.confirm;

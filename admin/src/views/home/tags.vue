@@ -11,24 +11,31 @@
         </el-col>
       </el-row>
 
-      <el-table :data="dynamicTags" style="width: 100%" border stripe @expand-change="expandChange">
-        <el-table-column type="expand">
-          <template v-slot="expand">
-            <el-table :data="expands[expand.row.tagId].article" border>
-              <el-table-column prop="articleId" label="ID"></el-table-column>
-              <el-table-column prop="title" label="文章标题"></el-table-column>
-            </el-table>
-          </template>
-        </el-table-column>
+      <el-table :data="dynamicTags" style="width: 100%" border stripe>
         <el-table-column prop="tagId" label="ID"></el-table-column>
         <el-table-column prop="tag" label="标签"></el-table-column>
         <el-table-column label="操作">
           <template v-slot="options">
+            <el-button
+              type="primary"
+              size="mini"
+              icon="el-icon-paperclip"
+              @click="showDialog(options.row)"
+            >查看</el-button>
             <el-button type="danger" size="mini" icon="el-icon-delete" @click="del(options.row)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
     </el-card>
+
+    <!-- dialog part -->
+    <el-dialog title="该标签下有篇文章" :visible.sync="dialogVisible" width="50%">
+      <span>这是一段信息</span>
+      <el-table :data="expands[row.tagId].article" border :v-if="showExpend">
+        <el-table-column prop="articleId" label="ID"></el-table-column>
+        <el-table-column prop="title" label="文章标题"></el-table-column>
+      </el-table>
+    </el-dialog>
   </div>
 </template>
 
@@ -40,15 +47,17 @@ export default {
       inputVisible: false,
       inputValue: '',
       expands: [],
-      loading: true
+      showExpend: false,
+      dialogVisible: false,
+      row: {}
     };
   },
   methods: {
+    // the method to get all tags
     async getTags() {
       try {
         const { data: res } = await this.$http.get('/tags/getTags');
         if (res.meta.status === 200) {
-          // this.$Message.success('获取标签信息成功！');
           this.dynamicTags = res.data;
           console.log(this.dynamicTags);
         }
@@ -56,6 +65,7 @@ export default {
         this.$Message.error('服务器出现错误！');
       }
     },
+    // the method to add a tag
     async addTag(tag) {
       try {
         const { data: res } = await this.$http.post('/tags/addTag', { tag });
@@ -66,6 +76,13 @@ export default {
         this.$Message.error('服务器出现错误！');
       }
     },
+    // use the method to add a tag
+    async add() {
+      await this.addTag(this.inputValue);
+      this.inputValue = '';
+      await this.getTags();
+    },
+    // delete the tag
     async delTag(tagId) {
       try {
         const { data: res } = await this.$http.delete('/tags/delTag', { data: { tagId } });
@@ -76,6 +93,7 @@ export default {
         this.$Message.error('服务器出现错误！');
       }
     },
+    // delete articles under the tag
     async delTagLink(tagId) {
       try {
         await this.$http.delete('/tags/delTagLink', { data: { tagId } });
@@ -83,16 +101,13 @@ export default {
         this.$Message.error('服务器出现错误！');
       }
     },
-    async add() {
-      await this.addTag(this.inputValue);
-      this.inputValue = '';
-      await this.getTags();
-    },
+    // delete a tag and the articles under this tag
     del(row) {
       this.$http.all([this.delTag(row.tagId), this.delTagLink(row.tagId)]);
       this.dynamicTags.splice(this.dynamicTags.indexOf(row), 1);
     },
-    async expandChange(row) {
+    // get the article under the tag
+    async getArticles(row) {
       if (!this.expands[row.tagId]) {
         try {
           const { data: res } = await this.$http.get('/tags/linkArticles', { params: { tagId: row.tagId } });
@@ -111,6 +126,13 @@ export default {
           this.$Message.error('服务器出现错误！');
         }
       }
+    },
+    // click the check-info button
+    async showDialog(row) {
+      this.dialogVisible = true;
+      this.row = row;
+      await this.getArticles(row);
+      this.showExpend = true;
     }
   },
   created() {
