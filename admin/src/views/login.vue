@@ -1,13 +1,13 @@
 <template>
-  <div class="login">
-    <img src="@/assets/img/forest.jpg" class="image" />
-    <form class="box">
-      <h1>login</h1>
-      <input type="text" placeholder="username" v-model="formData.username" />
-      <input type="password" placeholder="password" v-model="formData.password" />
-      <button @click.prevent="login" @keydown.enter="login">Login</button>
-    </form>
-  </div>
+<div class="login">
+  <img src="@/assets/img/forest.jpg" class="image" />
+  <form class="box">
+    <h1>login</h1>
+    <input type="text" placeholder="username" v-model="formData.username" />
+    <input type="password" placeholder="password" v-model="formData.password" />
+    <button @click.prevent="login" @keydown.enter="login">Login</button>
+  </form>
+</div>
 </template>
 
 <script>
@@ -23,7 +23,9 @@ export default {
   methods: {
     async login() {
       try {
-        const { data: res } = await this.$http.post('admin/login', this.formData);
+        const {
+          data: res
+        } = await this.$http.post('admin/login', this.formData);
         console.log('res', res);
         if (res.meta.status === 200) {
           this.$Message.success('登录成功！');
@@ -59,7 +61,7 @@ export default {
   background: rgba(35, 35, 35, 0.7);
 }
 
-.box > h1 {
+.box>h1 {
   color: #ffffff;
   margin: auto;
   text-transform: uppercase;
@@ -67,7 +69,7 @@ export default {
   font-size: 0.2rem;
 }
 
-.box > input {
+.box>input {
   display: block;
   background: none;
   transition-duration: 0.3s;
@@ -79,8 +81,8 @@ input::placeholder {
   color: #fff;
 }
 
-.box > input[type='text'],
-.box > input[type='password'] {
+.box>input[type='text'],
+.box>input[type='password'] {
   width: 2rem;
   height: 0.05rem;
   border: 0.01rem solid #fff;
@@ -89,14 +91,14 @@ input::placeholder {
   border-radius: 0.4rem;
 }
 
-.box > input[type='text']:focus,
-.box > input[type='password']:focus {
+.box>input[type='text']:focus,
+.box>input[type='password']:focus {
   width: 3rem;
   border: 0.01rem solid #99ccff;
   outline: none;
 }
 
-.box > button {
+.box>button {
   position: absolute;
   width: 1rem;
   padding: 0.05rem;
@@ -110,7 +112,7 @@ input::placeholder {
   font-size: 0.08rem;
 }
 
-.box > button:hover {
+.box>button:hover {
   background: #99ccff;
   outline: none;
   cursor: pointer;
